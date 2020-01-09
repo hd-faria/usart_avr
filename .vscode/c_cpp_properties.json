@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "at90can64",
+            "includePath": [
+                "/usr/lib/avr/include/**",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src"
+            ],
+            "defines": [
+                "F_CPU=16000000L",
+                "__AVR_AT90CAN64__"
+            ],
+            "compilerPath": "/usr/bin/avr-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "compilerArgs": [
+                "-g",
+                "-Wall",
+                "-mcall-prologues",
+                "-mmcu=at90can64 ",
+                "-Os ",
+                "-fno-exceptions"
+            ]
+        }
+    ],
+    "version": 4
+}
