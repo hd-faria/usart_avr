@@ -2,6 +2,13 @@
 
 Library to use usart communication on AT90CAN uC.
 
+- USART0:
+  - RXD0(PDI): PE0
+  - TXD0(PDO): PE1
+- USART1:
+  - RXD1(INT2): PD2
+  - TXD1(INT3): PD3
+
 ## Manifesto
 
 - .vscode

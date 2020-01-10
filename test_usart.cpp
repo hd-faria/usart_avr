@@ -2,6 +2,7 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include "usart.h"
 
 int main(){
 

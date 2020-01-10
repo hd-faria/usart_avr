@@ -8,13 +8,14 @@
  *  - https://github.com/abcminiuser/avr-tutorials/blob/master/USART/Output/USART.pdf
  */ 
 
-#include "avr/io.h"
+#include <avr/io.h>
 #include "usart.h"
 
 void USART0_Init8 (unsigned int baud){
 	/* Set baud rate */
-	UBRR0H = (unsigned char) (baud >> 8);
-	UBRR0L = (unsigned char) (baud);
+
+	UBRR0H = (unsigned char) (BAUD_PRESCALE >> 8);
+	UBRR0L = (unsigned char) (BAUD_PRESCALE);
 
 	/* Set frame format: 8data, no parity and 2stop bits */
 	UCSR0C = (0 << UMSEL0) | (0 << UPM0) | (1 << USBS0) | (3 << UCSZ0);
@@ -89,10 +90,17 @@ unsigned int USART0_Receive9 (void){
 	
 }
 
+void USART0_Flush (void){
+	unsigned char dummy;
+	while(UCSR0A & (1 << RXC0)){
+		dummy = UDR0;
+	}
+}
+
 void USART1_Init8 (unsigned int baud){
 	/* Set baud rate */
-	UBRR1H = (unsigned char) (baud >> 8);
-	UBRR1L = (unsigned char) (baud);
+	UBRR1H = (unsigned char) (BAUD_PRESCALE >> 8);
+	UBRR1L = (unsigned char) (BAUD_PRESCALE);
 
 	/* Set frame format: 8data, no parity and 2stop bits */
 	UCSR1C = (0 << UMSEL1) | (0 << UPM1) | (1 << USBS1) | (3 << UCSZ1);
@@ -166,4 +174,11 @@ unsigned int USART1_Receive9 (void) {
 	resh = (resh >> 1) & 0x01;
 	return ((resh << 8) | resl);
 	
+}
+
+void USART1_Flush (void){
+	unsigned char dummy;
+	while(UCSR0A & (1 << RXC0)){
+		dummy = UDR0;
+	}
 }
