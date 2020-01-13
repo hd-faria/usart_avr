@@ -4,15 +4,17 @@
 
 PORT=usb
 MCU=at90can64
-CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os -fno-exceptions
+F_CPU=16000000UL
+CFLAGS=-g -Wall -mcall-prologues -mmcu=$(MCU) -Os -fno-exceptions -DF_CPU=$(F_CPU)
 LDFLAGS=-Wl,-gc-sections -Wl,-relax
 CC=avr-gcc
 VPATH = /usr/lib/avr/include ../include/ 
 
-LINK_TARGET=test
+LINK_TARGET=test_usart
 
 OBJECT_FILES= \
-$(LINK_TARGET).o 
+$(LINK_TARGET).o \
+usart.o
 
 REBUILDABLES= \
 $(LINK_TARGET).hex \
@@ -30,7 +32,7 @@ clean :
 	@echo Done cleaning.
 
 $(LINK_TARGET).lst : $(LINK_TARGET).elf
-	avr-objdump -h -S main.elf > main.lst
+	avr-objdump -h -S $(LINK_TARGET).elf > $(LINK_TARGET).lst
 	@echo dumping of lst done.
 
 flash : $(LINK_TARGET).hex
@@ -59,7 +61,7 @@ $(LINK_TARGET).o : $(LINK_TARGET).cpp
 	@echo $@
 	@echo $<
 
-analogRead.o : analogRead.c
+usart.o : usart.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 	@echo $@
 	@echo $<

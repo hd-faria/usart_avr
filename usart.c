@@ -80,7 +80,7 @@ unsigned int USART0_Receive9 (void){
 	resl = UDR0;
 
 	/* If error, return -1 */
-	if( status & (1 << FE0) | (1 << DOR0) | (1 << UPE0) ){
+	if( status & ((1 << FE0) | (1 << DOR0) | (1 << UPE0)) ){
 		return -1;
 	}
 
@@ -166,7 +166,7 @@ unsigned int USART1_Receive9 (void) {
 	resl = UDR1;
 
 	/* If error, return -1 */
-	if( status & (1 << FE1) | (1 << DOR1) | (1 << UPE1) ){
+	if( status & ((1 << FE1) | (1 << DOR1) | (1 << UPE1)) ){
 		return -1;
 	}
 
