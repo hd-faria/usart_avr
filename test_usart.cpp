@@ -1,14 +1,14 @@
-#include <avr/io.h>
-#include <util/delay.h>
-#include "usart.h"
+#ifndef __cplusplus
+	#define __cplusplus
+#endif
 
 #ifndef F_CPU
 	#define F_CPU 16000000
 #endif
 
-#ifndef __cplusplus
-	#define __cplusplus
-#endif
+#include <avr/io.h>
+#include <util/delay.h>
+#include "usart.h"
 
 bool test1echo(void);
 
