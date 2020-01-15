@@ -37,6 +37,10 @@
 *** UBRRn = (F_CPU / (2*BAUD)) - 1
 */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void USART0_Init8 (unsigned int baud);
 void USART0_Transmit8 (unsigned char data);
 void USART0_Transmit9 (unsigned int data);
@@ -51,6 +55,11 @@ unsigned char USART1_Receive8 (void);
 unsigned int USART1_Receive9 (void);
 void USART1_Flush (void);
 
+//void send_string(unsigned char * msg );
+
+#ifdef __cplusplus
+}
+#endif
 
 
 #endif /* USART_H_ */
