@@ -32,18 +32,18 @@ bool test1echo(void){
 	unsigned char byte;
 
 	PORTG &= ~(1<<PG0); //Turn red LED on while receiving
-	//_delay_ms(500);		
+	_delay_ms(500);		
 	byte = USART0_Receive8();
 	
 	PORTG |= (1<<PG0); //Turn red LED off after receiving
-	//_delay_ms(500);	
+	_delay_ms(500);	
 	PORTG &= ~(1<<PG3); //Turn green LED on while transmitting 
-	//_delay_ms(500);
+	_delay_ms(500);
 	USART0_Transmit8(byte);
 	byte = 0x0A;
 	USART0_Transmit8(byte);
 	
 	PORTG |= (1<<PG3); //Turn green LED off after transmition
-	//_delay_ms(500);	
+	_delay_ms(500);	
 	return true;
 }
