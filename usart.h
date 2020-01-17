@@ -55,7 +55,7 @@ unsigned char USART1_Receive8 (void);
 unsigned int USART1_Receive9 (void);
 void USART1_Flush (void);
 
-//void send_string(unsigned char * msg );
+void USART0_send_string(char msg[]);
 
 #ifdef __cplusplus
 }

@@ -9,6 +9,7 @@
  */ 
 
 #include <avr/io.h>
+#include <string.h>
 #include "usart.h"
 
 void USART0_Init8 (unsigned int baud){
@@ -181,4 +182,14 @@ void USART1_Flush (void){
 	while(UCSR0A & (1 << RXC0)){
 		dummy = UDR0;
 	}
+}
+
+void USART0_send_string(char msg[]){
+	int i = 0;
+	while (i < strlen(msg)){
+		USART0_Transmit8(msg[i]);
+		i++;
+	}
+	USART0_Transmit8(0x0A); // new line
+
 }
