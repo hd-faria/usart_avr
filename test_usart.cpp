@@ -10,7 +10,8 @@
 #include <util/delay.h>
 #include "usart.h"
 
-bool test1echo(void);
+int test1echo(void);
+int teste2(void);
 
 int main(){
 
@@ -24,11 +25,13 @@ int main(){
 		
 		test1echo();
 
+		teste2();
+
 	}
 	
 }
 
-bool test1echo(void){
+int test1echo(void){
 	unsigned char byte;
 
 	PORTG &= ~(1<<PG0); //Turn red LED on while receiving
@@ -46,4 +49,8 @@ bool test1echo(void){
 	PORTG |= (1<<PG3); //Turn green LED off after transmition
 	_delay_ms(500);	
 	return true;
+}
+
+int teste2(){
+	USART0_send_string("Hello, World!");
 }
