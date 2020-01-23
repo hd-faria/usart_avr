@@ -184,7 +184,15 @@ void USART1_Flush (void){
 	}
 }
 
-void USART0_send_string(char msg[]){
+void USART0_print(char msg[]){
+	int i = 0;
+	while (i < strlen(msg)){
+		USART0_Transmit8(msg[i]);
+		i++;
+	}
+}
+
+void USART0_println(char msg[]){
 	int i = 0;
 	while (i < strlen(msg)){
 		USART0_Transmit8(msg[i]);

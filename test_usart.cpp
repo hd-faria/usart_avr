@@ -20,12 +20,7 @@ int main(){
 	PORTG |= (1 << PG0)|(1 << PG1)|(1 << PG2)|(1<<PG3); //Turn all LEDs off
 	
 	
-	_delay_ms(60000);
-	
 	USART0_Init8(103);
-	for(int i=1;i<200;i++){
-		USART0_Flush();
-		}
 
 	while (1){
 		
@@ -58,6 +53,6 @@ int test1echo(void){
 }
 
 int teste2(){
-	USART0_send_string("Hello, World!");
+	USART0_println("Hello, World!");
 	return 0;
 }
