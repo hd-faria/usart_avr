@@ -40,6 +40,11 @@ flash : $(LINK_TARGET).hex
 	@rm -f *.elf *.dep *.o
 	@echo Done flashing.
 
+flashMKII : $(LINK_TARGET).hex
+	avrdude -p $(MCU) -c avrispmkII -U flash:w:$(LINK_TARGET).hex
+	@rm -f *.elf *.dep *.o
+	@echo Done flashing.
+
 readeeprom :
 	avrdude -p $(MCU) -c atmelice_isp -P usb -U eeprom:r:eepromdump.hex:i
 
