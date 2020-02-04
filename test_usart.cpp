@@ -12,6 +12,7 @@
 
 int test1echo(void);
 int teste2(void);
+int teste3(void);
 
 int main(){
 
@@ -22,13 +23,13 @@ int main(){
 	//PORTG |= (1 << PG0)|(1 << PG1)|(1 << PG2)|(1<<PG3); //Turn all LEDs off
 	
 	
-	USART0_Init8(103);
+	USART0_Init(9600,SERIAL_8N2);
 
 	while (1){
 		
-		test1echo();
-
+//		test1echo();
 //		teste2();
+		teste3();
 
 	}
 	
@@ -62,5 +63,14 @@ int test1echo(void){
 
 int teste2(){
 	USART0_println("Hello, World!");
+	return 0;
+}
+
+int teste3(){
+	char byte[1];
+
+	byte[0] = USART0_Receive8();
+	USART0_print("Recieved ");
+	USART0_println(byte);
 	return 0;
 }

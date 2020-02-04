@@ -12,6 +12,18 @@
 #include <string.h>
 #include "usart.h"
 
+void USART0_Init (unsigned int baud, unsigned char config){
+	/* Set baud rate */
+	UBRR0H = (unsigned char) (((((F_CPU / 16) + (baud / 2)) / (baud)) - 1) >> 8);
+	UBRR0L = (unsigned char) ((((F_CPU / 16) + (baud / 2)) / (baud)) - 1);
+
+	/* Set frame format */
+	UCSR0C = config;
+	/* Enable receiver and transmiter */
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
+
+}
+
 void USART0_Init8 (unsigned int baud){
 	/* Set baud rate */
 
@@ -199,5 +211,16 @@ void USART0_println(char msg[]){
 		i++;
 	}
 	USART0_Transmit8(0x0A); // new line
+}
 
+char * USART0_read(void){
+	int i = 0;
+	unsigned char buffer[UART_BUFFER];
+	do{
+		buffer[i] = USART0_Receive8();
+		i++;
+	}while ((i<UART_BUFFER)&& ~(buffer[i-1]=='\n'));
+	buffer[i] = '\0'; // new line
+
+	return buffer;
 }
